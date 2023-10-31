@@ -2,11 +2,10 @@
 // Feel free to make this to what you want!
 // Example:
 
+
 // HP and AP counters
 let fungusHP = 100;
 let playerAP = 100;
-
-// prevent HP/AP from going below 0
 
 function attack(event) {
 
@@ -34,6 +33,14 @@ function attack(event) {
             break;
     }
 
+    // prevent HP/AP from going below 0
+    if (fungusHP < 0) {
+        fungusHP = 0;
+    }
+    if (playerAP < 0) {
+        playerAP = 0;
+    }
+
     // update DOM
     renderChanges();
 };
@@ -45,17 +52,18 @@ function renderChanges() {
     document.getElementById("ap-text").innerText = `${playerAP} AP`
     document.getElementById("hp-text").innerText = `${fungusHP} HP`
 
-    console.log(fungusHP)
     // set death states
     if (playerAP <= 0) {
         document.getElementById('fungus').classList.remove('walk')
         document.getElementById('fungus').classList.add('jump')
+        // document.getElementById('attacks')
     }
     if (fungusHP <= 0) {
         document.getElementById('fungus').classList.remove('walk')
         document.getElementById('fungus').classList.add('dead')
     }
 }
+
 
 function onReady() {
     console.log("Ready to go!")
